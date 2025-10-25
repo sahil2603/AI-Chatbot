@@ -1,0 +1,34 @@
+const chatBox = document.getElementById('chat-box');
+const sendBtn = document.getElementById('send-btn');
+const userInput = document.getElementById('user-input');
+
+sendBtn.addEventListener('click', sendMessage);
+
+function sendMessage() {
+  const userMessage = userInput.value.trim();
+  if (userMessage === '') return;
+
+  addMessage('user', userMessage);
+  userInput.value = '';
+
+  setTimeout(() => {
+    const botReply = getBotReply(userMessage);
+    addMessage('bot', botReply);
+  }, 500);
+}
+
+function addMessage(sender, text) {
+  const msg = document.createElement('div');
+  msg.classList.add('message', sender);
+  msg.textContent = text;
+  chatBox.appendChild(msg);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function getBotReply(input) {
+  const msg = input.toLowerCase();
+  if (msg.includes('hello')) return 'Hi there!';
+  if (msg.includes('how are you')) return 'I’m doing great!';
+  if (msg.includes('bye')) return 'Goodbye!';
+  return 'Sorry, I didn’t understand that.';
+}
