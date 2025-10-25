@@ -1,3 +1,4 @@
+console.log("Script is loaded!");
 body {
   background: #f5f7fa;
   display: flex;
